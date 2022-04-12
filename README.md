@@ -6,7 +6,7 @@
 
 ## 安裝
 
-[東風破](https://github.com/rime/plum) 安裝口令： <code> bash rime-install arsenali/rime-triple-pinyin </code>
+[東風破](https://github.com/rime/plum) 安裝口令： <code> bash rime-install arsenali/rime-triple-pinyin-bopomofo </code>
 
 本方案詞庫依賴於 [地球拼音](https://github.com/rime/rime-terra-pinyin) ℞ rime-terra-pinyin，安裝本方案前請先安裝 ℞ rime-terra-pinyin。
 
