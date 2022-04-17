@@ -152,6 +152,7 @@ speller:
     - xform/^([QWERTASDFGZXCVB])(ia|iai|ian)([1-5])$/$1A$2$3/
     - xform/^([QWERTASDFGZXCVB])(io|iei|ien|i)([1-5])$/$1S$2$3/
     - xform/^([QWERTASDFGZXCVB])(iao|iang)([1-5])$/$1D$2$3/
+    - xform/^([RTGB])(ie)([1-5])$/$1D$2$3/
     - xform/^([QWERTASDFGZXCVB])(ie|iou|ieng)([1-5])$/$1F$2$3/
     
     - xform/^([QWERTASDFGZXCVB])(ua|uai|uan)([1-5])$/$1Z$2$3/
@@ -197,6 +198,7 @@ speller:
     - derive/^([qwertasdfgzxcvbyhn]{2})[qwert]$/$1y/
     - derive/^([qwertasdfgzxcvbyhn]{2})[asdfg]$/$1h/
     - derive/^([qwertasdfgzxcvbyhn]{2})[zxcvb]$/$1n/
+    # - derive/^([qwertasdfgzxcvbyhn])([qwertasdfgzxcvbyhn]{2})$/$2/     # 後兩碼簡拼
 
 translator:
   dictionary: terra_pinyin
@@ -623,6 +625,7 @@ luna_pinyin_lookup:
     - xform/\<([QWERTASDFGZXCVB])(ia|iai|ian)([1-5])\>/$1A$2$3/
     - xform/\<([QWERTASDFGZXCVB])(io|iei|ien|i)([1-5])\>/$1S$2$3/
     - xform/\<([QWERTASDFGZXCVB])(iao|iang)([1-5])\>/$1D$2$3/
+    - xform/\<([RTGB])(ie)([1-5])\>/$1D$2$3/
     - xform/\<([QWERTASDFGZXCVB])(ie|iou|ieng)([1-5])\>/$1F$2$3/
     
     - xform/\<([QWERTASDFGZXCVB])(ua|uai|uan)([1-5])\>/$1Z$2$3/
@@ -668,6 +671,8 @@ luna_pinyin_lookup:
     # - derive/\<([qwertasdfgzxcvbyhn]{2})[qwert]\>/$1y/
     # - derive/\<([qwertasdfgzxcvbyhn]{2})[asdfg]\>/$1h/
     # - derive/\<([qwertasdfgzxcvbyhn]{2})[zxcvb]\>/$1n/
+    # - derive/\<([qwertasdfgzxcvbyhn])([qwertasdfgzxcvbyhn]{2})\>/$2/     # 後兩碼簡拼
+    
    # 變形
     - xlit/qwertasdfgzxcvb/QWERTASDFGZXCVB/
 
