@@ -14,6 +14,7 @@
 
 [苹果版](https://github.com/arsenali/rime-triple-pinyin-lssp/wiki/苹果版)
 
+<br>
 
 ## 鍵位圖
 
