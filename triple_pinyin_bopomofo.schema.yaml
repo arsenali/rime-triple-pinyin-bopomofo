@@ -4,7 +4,7 @@
 schema:
   schema_id: triple_pinyin_bopomofo
   name: 李氏注音
-  version: "3.5"
+  version: "3.6"
   author:
     - 佛振 <chen.sst@gmail.com>
     - 阿森納裡 <15678407@qq.com>
@@ -14,7 +14,7 @@ schema:
     可用HSPNZ（橫豎撇捺折）連續輸入筆畫輔助碼進行逐字篩選；
     上屏碼和提示碼有全拼（無調拼音）、帶調拼音、注音符號和國語羅馬字四種形式，可任意切換。
   dependencies:
-    - luna_pinyin
+    - pinyin_simp
     - stroke
 
 switches:
@@ -22,8 +22,8 @@ switches:
     reset: 0
     states: [ 中文, 英文 ]
     
-  - name: simplification
-    states: [ 繁體, 简体 ]
+  - name: traditionalization
+    states: [ 简体, 繁体 ]
     
   - name: full_shape
     states: [ 半角, 全角 ]
@@ -88,12 +88,12 @@ engine:
   translators:
     - echo_translator  # 沒有其他結果時，創建一個與編碼串一樣的候選項
     - punct_translator
-    - reverse_lookup_translator@luna_pinyin_lookup
+    - reverse_lookup_translator@pinyin_lookup
     - reverse_lookup_translator@stroke_lookup
     - lua_translator@*triple_pinyin_bopomofo
     - script_translator
   filters:
-    - simplifier
+    - simplifier@traditionalize                     # 简繁切换
     - lua_filter@*aux_code_stroke
     - uniquifier
 
@@ -253,7 +253,7 @@ speller:             # 拼寫處理器：詞典編碼->輸入碼
     # - derive/^([qwertasdfgzxcvbyhn])([qwertasdfgzxcvbyhn]{2})$/$2/     # 後兩碼簡拼
 
 quanpin:             # 輸入翻譯器：輸入碼->上屏碼：漢語拼音全拼
-  dictionary: terra_pinyin.extended
+  dictionary: triple_pinyin
   prism: triple_pinyin_bopomofo
   spelling_hints: 4 # ～字以內候選標註完整提示碼
   always_show_comments: true           # 始終顯示提示碼
@@ -440,8 +440,8 @@ quanpin:             # 輸入翻譯器：輸入碼->上屏碼：漢語拼音全�
     - xform/\<y([aoej]-)/$1/
     - xform/\<yu([aoej]-)/w$1/
     - xform/\<([zcs])(u)?([aoej]-)/$1h$2$3/
-    - xform/\<([yzcs])i([aoej]-)/$1$2/
-    - xform/\<([yzcs])v([aoj]-)/$1u$2/
+    - xform/\<([zcsy])i([aoej]-)/$1$2/
+    - xform/\<([zcsy])v([aoj]-)/$1u$2/
     - xform/\<ri([aoej]-)/f$1/
     - xform/\<rv([aoj]-)/fu$1/
     - xform/j-/eh-/
@@ -487,7 +487,7 @@ quanpin:             # 輸入翻譯器：輸入碼->上屏碼：漢語拼音全�
     # __append: {__include: triple_pinyin:/translator/comment_format_copy1}
    # __patch:                                # 詞典編碼->提示碼：分兩段2
      # __append:
-      # __include: triple_pinyin_lishi26.schema:/luna_pinyin_lookup/comment_format?  # 輸入碼（方案編碼）：李氏三拼(lssp) / 李氏三拼aeo(lsspaeo) / 李氏注音(bopomofo) / 廿六三拼(lishi26)
+      # __include: triple_pinyin_lishi26.schema:/pinyin_lookup/comment_format?  # 輸入碼（方案編碼）：李氏三拼(lssp) / 李氏三拼aeo(lsspaeo) / 李氏注音(bopomofo) / 廿六三拼(lishi26)
       # __append: {__include: triple_pinyin:/translator/comment_format_copy2}
    __patch:                                # 詞典編碼->提示碼：分兩段3
       __append:
@@ -495,7 +495,7 @@ quanpin:             # 輸入翻譯器：輸入碼->上屏碼：漢語拼音全�
        __append: {__include: triple_pinyin:/translator/comment_format_copy3}
 
 ddpy:                # 輸入翻譯器：輸入碼->上屏碼：帶調拼音
-  dictionary: terra_pinyin.extended
+  dictionary: triple_pinyin
   prism: triple_pinyin_bopomofo
   spelling_hints: 4 # ～字以內候選標註完整提示碼
   always_show_comments: true           # 始終顯示提示碼
@@ -506,7 +506,7 @@ ddpy:                # 輸入翻譯器：輸入碼->上屏碼：帶調拼音
   comment_format: *translator_comment  # 詞典編碼->提示碼
 
 zhuyin:              # 輸入翻譯器：輸入碼->上屏碼：注音符號
-  dictionary: terra_pinyin.extended
+  dictionary: triple_pinyin
   prism: triple_pinyin_bopomofo
   spelling_hints: 4 # ～字以內候選標註完整提示碼
   always_show_comments: true           # 始終顯示提示碼
@@ -517,7 +517,7 @@ zhuyin:              # 輸入翻譯器：輸入碼->上屏碼：注音符號
   comment_format: *translator_comment  # 詞典編碼->提示碼
 
 guoluo:              # 輸入翻譯器：輸入碼->上屏碼：國語羅馬字
-  dictionary: terra_pinyin.extended
+  dictionary: triple_pinyin
   prism: triple_pinyin_bopomofo
   spelling_hints: 4 # ～字以內候選標註完整提示碼
   always_show_comments: true           # 始終顯示提示碼
@@ -528,7 +528,7 @@ guoluo:              # 輸入翻譯器：輸入碼->上屏碼：國語羅馬字
   comment_format: *translator_comment  # 詞典編碼->提示碼
 
 translator:          # 主翻譯器，不轉換輸入碼
-  dictionary: terra_pinyin.extended
+  dictionary: triple_pinyin
   prism: triple_pinyin_bopomofo
   spelling_hints: 4 # ～字以內候選標註完整提示碼
   always_show_comments: true           # 始終顯示提示碼
@@ -539,9 +539,16 @@ translator:          # 主翻譯器，不轉換輸入碼
     - xlit|;"| '|                                           # 把;替換為空格，恢復輸入的隔音符號'
   comment_format: *translator_comment  # 詞典編碼->提示碼
 
-luna_pinyin_lookup:  # 拼音反查
-  tag: luna_pinyin_lookup
-  dictionary: luna_pinyin
+# 简繁切换
+traditionalize:
+  option_name: traditionalization  # 对应 switches 中的 name
+  opencc_config: s2t.json          # s2t.json | s2hk.json | s2tw.json | s2twp.json
+  tips: none                       # 转换提示: all 都显示 | char 仅单字显示 | none 不显示
+  tags: [ abc, pinyin_lookup ]     # 限制在对应 tag，不对其他如反查的内容做简繁转换
+
+pinyin_lookup:       # 拼音反查
+  tag: pinyin_lookup
+  dictionary: pinyin_simp
   enable_completion: true
   always_show_comments: true           # 始終顯示提示碼
   prefix: "`"
@@ -702,7 +709,7 @@ luna_pinyin_lookup:  # 拼音反查
     # - derive/\<([qwertasdfgzxcvbyhn])([qwertasdfgzxcvbyhn]{2})\>/$2/     # 後兩碼簡拼
     
    # 10 變形
-    - xlit/qwertasdfgzxcvb/QWERTASDFGZXCVB/
+    # - xlit/qwertasdfgzxcvb/QWERTASDFGZXCVB/
 
 stroke_lookup:       # 筆畫反查
   tag: stroke_lookup
@@ -722,30 +729,13 @@ punctuator:
 key_binder:
   import_preset: default
   bindings:
-    - { accept: "Control+q", when: always, send: "" }  # 保留给 Lua 处理器使用
-    - { accept: "Control+l", when: always, send: "" }  # 保留给 Lua 处理器使用
-    - { accept: "Control+m", when: always, send: "" }  # 保留给 Lua 处理器使用
-  
     - { accept: Return, send: "Shift+Return", when: composing }
     - { accept: "Shift+Return", send: Return, when: composing }
     
-    - { accept: minus, send: minus, when: has_menu }
-    - { accept: minus, send: Page_Up, when: paging }
-    # - { accept: minus, send: Page_Up, when: has_menu }
-    # - { accept: equal, send: Page_Down, when: has_menu }
-    
     - { accept: comma, send: comma, when: paging }
-    # - { accept: comma, send: Page_Up, when: paging }
     - { accept: period, send: period, when: has_menu }
-    # - { accept: period, send: Page_Down, when: has_menu }
     
-    # - { accept: semicolon, send: 2, when: has_menu }
-    # - { accept: apostrophe, send: 3, when: has_menu }
-    
-    - {accept: "Control+Shift+5", toggle: ascii_punct, when: always}
-    - {accept: "Control+Shift+percent", toggle: ascii_punct, when: always}
-    
-    - {accept: "Control+Shift+F", toggle: simplification, when: always}
+    - {accept: "Control+Shift+F", toggle: traditionalization, when: always}
 
 recognizer:
   import_preset: default
@@ -754,13 +744,8 @@ recognizer:
     uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
     punct: '^/([0-9]0?|[A-Za-z]+)$'
-    luna_pinyin_lookup: "`[a-z]*'?$"
+    pinyin_lookup: "`[a-z]*'?$"
     stroke_lookup: "~[a-z]*'?$"
 
-__patch:             # 簡體詞庫轉換為繁體
-  switches/@after 1: {name: op_n, reset: 1}            # 添加簡轉繁開關並鎖定簡轉繁狀態，注意不寫states（不在開關菜單中顯示）
-  engine/filters/@before 0: simplifier@sc_tc           # 先加載簡轉繁過濾器
-  sc_tc: {option_name: op_n, opencc_config: s2t.json}  # s2t 通用繁體/s2hk 香港繁體/s2tw 台灣繁體
-
 __patch:             # 使用語言模型
-  - grammar:/triple_pinyin_hant?
+  - grammar:/triple_pinyin_hans?
