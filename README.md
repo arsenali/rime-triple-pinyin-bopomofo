@@ -4,15 +4,15 @@
 
 鑒於傳統的41鍵大千式注音鍵位佈局不便於手機打字，本方案對大千鍵位做合併調整，把鍵位壓縮至15鍵，同時保證帶聲調、無重音，通過“聲母+介韻+去重碼&聲調”三碼輸入一個帶調音節，是一種改良版的大千注音鍵盤佈局。
 
-## 安裝
+QQ羣：[150478288](https://jq.qq.com/?_wv=1027&k=5wf1uTQ)
 
-本方案是 [李氏三拼](https://github.com/arsenali/rime-triple-pinyin-lssp) 係列方案之一，依賴於李氏三拼基礎方案，安裝本方案前請先安裝 ℞ `rime-triple-pinyin-lssp`。
+<br>
 
-各平台安裝方法同李氏三拼，請參考：
+## 下載與安裝
 
-[安卓版和windows版](https://github.com/arsenali/rime-triple-pinyin-lssp/wiki/安卓版和windows版)
+本方案是 [李氏三拼](https://github.com/arsenali/rime-triple-pinyin-lssp) 係列方案之一，方案所需全部文件已打包，可在[網盤](http://lssp.ysepan.com/)或QQ羣([150478288](https://jq.qq.com/?_wv=1027&k=5wf1uTQ))下載補丁包直接導入。
 
-[苹果版](https://github.com/arsenali/rime-triple-pinyin-lssp/wiki/苹果版)
+安裝方法可參考【[下载与安装](https://github.com/arsenali/rime-triple-pinyin-lssp#下载与安装)】，詳見【[安装方法](https://github.com/arsenali/rime-triple-pinyin-lssp/wiki/安装方法)】。
 
 <br>
 
@@ -183,7 +183,7 @@ _截圖使用的是“磐石”主題，“IOS”配色_
 
 ---
 
-## 說明和下載
+## 說明
 
 **本方案相當於注音和雙拼的結合版，可打前兩碼簡拼，此時類似於普通的有重音的雙拼，第三碼相當於直接輔助碼。**
 
@@ -193,19 +193,4 @@ _截圖使用的是“磐石”主題，“IOS”配色_
 
 點擊“反查”可使用拼音或筆畫進行編碼反查。
 
-默認只載入地球拼音詞庫，加載“八股文”語言模型，如需使用萬象等詞庫需自行下載並在詞庫列表文件terra_pinyin.extended.dict.yaml中啟用，使用其他語言模型請修改grammar.custom.yaml文件。
-
-下載地址：http://www.lssp.ysepan.com/
-
-QQ羣：[150478288](https://jq.qq.com/?_wv=1027&k=5wf1uTQ)
-
 <br>
-
-## 收藏和克隆
-
-### &#8627; Stargazers
-[![Stargazers repo roster for @arsenali/rime-triple-pinyin-bopomofo](https://reporoster.com/stars/arsenali/rime-triple-pinyin-bopomofo)](https://github.com/arsenali/rime-triple-pinyin-bopomofo/stargazers)
-
-### &#8627; Forkers
-[![Forkers repo roster for @arsenali/rime-triple-pinyin-bopomofo](https://reporoster.com/forks/arsenali/rime-triple-pinyin-bopomofo)](https://github.com/arsenali/rime-triple-pinyin-bopomofo/network/members)
-
